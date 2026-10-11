@@ -11,6 +11,7 @@ An independent Next.js frontend for the marketanalysis API. Estimate history is 
 
 Copy `.env.example` to `.env.local`, then set `MARKETANALYSIS_API_URL` to the running marketanalysis API. Install dependencies and start the frontend:
 
+## before running below powershell command switch to the projetc folde "AppUiWithRouting"
 ```powershell
 npm.cmd install
 npm.cmd run dev
