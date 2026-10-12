@@ -15,7 +15,8 @@ import {
   type PropertyInput,
 } from "@/lib/property";
 
-const STORAGE_KEY = "marketanalysis.estimates.v1";
+const STORAGE_KEY = "valueestimator.estimates.v1";
+const LEGACY_STORAGE_KEY = "marketanalysis.estimates.v1";
 
 type NewEstimate = {
   label: string;
@@ -39,7 +40,9 @@ export function EstimatesProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
+      const stored =
+        window.localStorage.getItem(STORAGE_KEY) ??
+        window.localStorage.getItem(LEGACY_STORAGE_KEY);
       if (stored) {
         const parsed: unknown = JSON.parse(stored);
         const result = estimateRecordSchema.array().safeParse(parsed);

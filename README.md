@@ -1,6 +1,6 @@
 # Parcel property estimates
 
-An independent Next.js frontend for the marketanalysis API. Estimate history is stored in the current browser; no account or remote history store is used.
+An independent Next.js frontend for the Value Estimator API. Estimate history is stored in the current browser; no account or remote history store is used.
 
 ## Requirements
 
@@ -9,7 +9,7 @@ An independent Next.js frontend for the marketanalysis API. Estimate history is 
 
 ## Setup and run
 
-Copy `.env.example` to `.env.local`, then set `MARKETANALYSIS_API_URL` to the running marketanalysis API. Install dependencies and start the frontend:
+Copy `.env.example` to `.env.local`, then set `VALUEESTIMATOR_API_URL` to the running Value Estimator API. Install dependencies and start the frontend:
 
 ## before running below powershell command switch to the projetc folde "AppUiWithRouting"
 ```powershell
@@ -17,7 +17,7 @@ npm.cmd install
 npm.cmd run dev
 ```
 
-Open `http://localhost:3000`. Start the existing `PricePredictionModel` API and the separate `marketanalysis` API first. The Next.js Route Handler forwards estimate requests server-to-server, so browser CORS access is not required.
+Open `http://localhost:3000`. Start the existing `PricePredictionModel` API and the separate `valueestimator` API first. The Next.js Route Handler forwards estimate requests server-to-server, so browser CORS access is not required.
 
 ## Checks
 

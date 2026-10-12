@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const baseUrl = process.env.MARKETANALYSIS_API_URL?.replace(/\/$/, "");
+  const baseUrl = process.env.VALUEESTIMATOR_API_URL?.replace(/\/$/, "");
   if (!baseUrl) {
     return NextResponse.json(
       { message: "The estimate service is not configured." },
