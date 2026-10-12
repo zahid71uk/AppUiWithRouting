@@ -8,6 +8,7 @@ const items = [
   { href: "/", label: "Estimate", icon: House },
   { href: "/history", label: "History", icon: Clock3 },
   { href: "/compare", label: "Compare", icon: Layers3 },
+  { href: "/market-analysis", label: "Market analysis", icon: ChartNoAxesCombined },
 ];
 
 export function Navigation() {
@@ -16,7 +17,9 @@ export function Navigation() {
   return (
     <nav aria-label="Main navigation" className="nav-tabs">
       {items.map(({ href, label, icon: Icon }) => {
-        const active = pathname === href;
+        const active = href === "/market-analysis"
+          ? pathname.startsWith(href)
+          : pathname === href;
         return (
           <Link
             key={href}

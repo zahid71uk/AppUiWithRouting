@@ -8,7 +8,7 @@ export default function HistoryPage() {
           <p className="eyebrow">PROPERTY DESK <span className="eyebrow-slash">/</span> 02</p>
           <h1>Estimate history</h1>
         </div>
-        <span className="page-index">02 <span>/</span> 03</span>
+        <span className="page-index">02 <span>/</span> 04</span>
       </div>
       <section className="history-panel" aria-label="Saved property estimates">
         <HistoryTable />

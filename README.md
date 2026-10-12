@@ -1,6 +1,6 @@
-# Parcel property estimates
+# Parcel property desk
 
-An independent Next.js frontend for the Value Estimator API. Estimate history is stored in the current browser; no account or remote history store is used.
+An independent Next.js frontend for the Value Estimator and Market Analysis APIs. Estimate history is stored in the current browser; no account or remote history store is used.
 
 ## Requirements
 
@@ -9,7 +9,7 @@ An independent Next.js frontend for the Value Estimator API. Estimate history is
 
 ## Setup and run
 
-Copy `.env.example` to `.env.local`, then set `VALUEESTIMATOR_API_URL` to the running Value Estimator API. Install dependencies and start the frontend:
+Copy `.env.example` to `.env.local`, then configure `VALUEESTIMATOR_API_URL` and `MARKET_ANALYSIS_API_URL` for the running backend services. Install dependencies and start the frontend:
 
 ## before running below powershell command switch to the projetc folde "AppUiWithRouting"
 ```powershell
@@ -17,7 +17,7 @@ npm.cmd install
 npm.cmd run dev
 ```
 
-Open `http://localhost:3000`. Start the existing `PricePredictionModel` API and the separate `valueestimator` API first. The Next.js Route Handler forwards estimate requests server-to-server, so browser CORS access is not required.
+Open `http://localhost:3000`. Start `PricePredictionModel`, `valueestimator`, and `marketanalysis` first. Next.js Route Handlers forward requests server-to-server, so browser CORS access is not required.
 
 ## Checks
 
@@ -33,5 +33,6 @@ npm.cmd run build
 - `/` creates a property estimate and shows recent results.
 - `/history` lists or removes estimates saved in this browser.
 - `/compare` compares up to five saved properties and their model estimates.
+- `/market-analysis` filters and visualizes descriptive statistics from the supplied housing sample, supports a model what-if estimate, and exports filtered rows as CSV or a print-ready PDF.
 
-The estimates are model outputs, not independent appraisals or external market valuations.
+The market dataset currently contains 50 rows without dates or locations. Analysis is descriptive sample data, not a market trend, independent appraisal, or external market valuation. What-if results are model outputs, not valuations.

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
-import { Clock3 } from "lucide-react";
+import { ChartNoAxesCombined } from "lucide-react";
 
 import { BrandMark, Navigation } from "@/components/navigation";
 import { EstimatesProvider } from "@/hooks/use-estimates";
@@ -10,8 +10,8 @@ const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-ui" });
 const instrumentSerif = Instrument_Serif({ subsets: ["latin"], weight: "400", variable: "--font-display" });
 
 export const metadata: Metadata = {
-  title: "Parcel | Property estimates",
-  description: "Property price estimates and comparisons.",
+  title: "Parcel | Property desk",
+  description: "Property estimates, comparisons, and sample market analysis.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <header className="topbar">
               <BrandMark />
               <Navigation />
-              <div className="topbar-meta"><Clock3 size={14} aria-hidden="true" /> BROWSER HISTORY</div>
+              <div className="topbar-meta"><ChartNoAxesCombined size={14} aria-hidden="true" /> PROPERTY INSIGHTS</div>
             </header>
             <main id="main-content" className="main-content">{children}</main>
             <footer className="site-footer">
