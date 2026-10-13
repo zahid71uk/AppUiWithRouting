@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChartNoAxesCombined, Clock3, House, Layers3 } from "lucide-react";
+import { ChartNoAxesCombined, Clock3, Database, House, Layers3 } from "lucide-react";
 
 const items = [
   { href: "/", label: "Estimate", icon: House },
   { href: "/history", label: "History", icon: Clock3 },
   { href: "/compare", label: "Compare", icon: Layers3 },
   { href: "/market-analysis", label: "Market analysis", icon: ChartNoAxesCombined },
+  { href: "/data-management", label: "Data", icon: Database },
 ];
 
 export function Navigation() {
@@ -17,7 +18,7 @@ export function Navigation() {
   return (
     <nav aria-label="Main navigation" className="nav-tabs">
       {items.map(({ href, label, icon: Icon }) => {
-        const active = href === "/market-analysis"
+        const active = href === "/market-analysis" || href === "/data-management"
           ? pathname.startsWith(href)
           : pathname === href;
         return (

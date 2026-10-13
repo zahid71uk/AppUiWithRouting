@@ -185,6 +185,31 @@ h2 { margin: 0; font-family: var(--font-display); font-size: 29px; line-height: 
 .table-count { color: #77867f; font-size: 10px; }
 .market-table { min-width: 840px; }
 .market-table th, .market-table td { padding: 12px 10px; }
+.model-data-overview { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 17px; }
+.model-data-status { min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 18px 20px; }
+.model-data-status .eyebrow { margin: 0; }
+.model-data-status > strong { overflow-wrap: anywhere; color: var(--ink); font-size: 23px; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.model-data-status > span { color: #7c8a83; font-size: 10px; }
+.model-ready { color: var(--green-dark) !important; }
+.model-unavailable { color: var(--coral) !important; }
+.dataset-upload-panel { display: grid; gap: 22px; margin-bottom: 17px; padding: 23px; }
+.dataset-upload-panel h2 { font-size: 26px; }
+.dataset-upload-form { display: grid; gap: 16px; }
+.dataset-upload-fields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, .7fr); gap: 15px; }
+.dataset-upload-fields input[type="file"] { height: auto; min-height: 43px; padding: 8px 10px; }
+.dataset-upload-fields input[type="password"] { width: 100%; height: 43px; padding: 0 12px; color: var(--ink); background: #fbfcfb; border: 1px solid #dbe4df; border-radius: 5px; }
+.dataset-upload-hint { margin: 5px 0 0; color: #85928b; font-size: 10px; }
+.dataset-upload-footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 15px; border-top: 1px solid #edf1ef; }
+.dataset-upload-footer .privacy-note { max-width: 560px; }
+.dataset-upload-message { margin: 0; padding: 11px 13px; color: var(--green-dark); background: var(--mint); border-radius: 5px; font-size: 12px; }
+.model-data-table-panel { padding: 22px 20px 8px; }
+.model-data-table { min-width: 520px; }
+.dataset-pagination { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0 4px; }
+.dataset-pagination .button { min-width: 94px; }
+.pagination-current { color: #6f8077; font-size: 11px; font-variant-numeric: tabular-nums; }
+.pagination-disabled { opacity: .45; cursor: not-allowed; }
+.model-data-loading { min-height: 150px; margin-bottom: 16px; background: #e9efec; border-radius: 8px; animation: pulse 1.2s ease-in-out infinite alternate; }
+.model-data-loading-table { min-height: 360px; }
 .sort-button { display: inline-flex; align-items: center; gap: 5px; padding: 2px 0; color: inherit; background: transparent; border: 0; font: inherit; cursor: pointer; }
 .sort-button:hover { color: var(--green); }
 .market-empty { min-height: 180px; }
@@ -198,6 +223,8 @@ h2 { margin: 0; font-family: var(--font-display); font-size: 29px; line-height: 
   .market-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .market-chart-grid { grid-template-columns: 1fr; }
   .what-if-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .model-data-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dataset-upload-fields { grid-template-columns: 1fr; }
   .market-loading-metrics { grid-template-columns: repeat(2, 1fr); }
   .market-loading-charts { grid-template-columns: 1fr; }
 }
@@ -251,6 +278,13 @@ h2 { margin: 0; font-family: var(--font-display); font-size: 29px; line-height: 
   .market-chart-panel h2, .what-if-panel h2, .market-table-panel h2 { font-size: 23px; }
   .market-chart { height: 220px; }
   .what-if-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .model-data-overview { grid-template-columns: 1fr; gap: 8px; }
+  .model-data-loading { min-height: 120px; }
+  .model-data-loading-table { min-height: 300px; }
+  .model-data-status { padding: 15px; }
+  .dataset-upload-panel, .model-data-table-panel { padding: 18px 12px 12px; }
+  .dataset-upload-footer { align-items: stretch; flex-direction: column; }
+  .dataset-upload-footer .button { width: 100%; }
   .what-if-footer { align-items: stretch; flex-direction: column; }
   .what-if-result { align-items: start; text-align: left; }
   .market-table-panel { padding: 18px 12px 6px; }
