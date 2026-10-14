@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { propertySchema, type PropertyInput } from "@/lib/property";
 import { whatIfResponseSchema } from "@/lib/market-analysis";
+import { logServerError } from "@/lib/server-log";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -27,6 +28,9 @@ export async function POST(request: Request) {
     });
     const responseBody: unknown = await response.json().catch(() => null);
     if (!response.ok) {
+      if (response.status >= 500) {
+        logServerError("what-if.upstream-failure", null, { statusCode: response.status });
+      }
       return NextResponse.json(
         { message: response.status === 400 || response.status === 422 ? "The property details were rejected." : "The estimate service is unavailable." },
         { status: response.status === 400 || response.status === 422 ? response.status : 502 },
@@ -34,11 +38,13 @@ export async function POST(request: Request) {
     }
     const result = whatIfResponseSchema.safeParse(responseBody);
     if (!result.success) {
+      logServerError("what-if.invalid-upstream-response", null, { statusCode: 502 });
       return NextResponse.json({ message: "The estimate service returned invalid data." }, { status: 502 });
     }
     return NextResponse.json(result.data);
   } catch (error) {
     const timedOut = error instanceof Error && error.name === "TimeoutError";
+    logServerError("what-if.request-failed", error, { statusCode: timedOut ? 504 : 503 });
     return NextResponse.json(
       { message: timedOut ? "The estimate request timed out." : "The analysis service is unavailable." },
       { status: timedOut ? 504 : 503 },

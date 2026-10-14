@@ -1,6 +1,7 @@
 import "server-only";
 
 import { datasetResponseSchema, modelHealthSchema, modelMetricsSchema } from "@/lib/model-data";
+import { logServerError } from "@/lib/server-log";
 import type { ModelDataSnapshot } from "@/lib/model-data";
 
 export class ModelDataApiError extends Error {
@@ -54,8 +55,12 @@ export async function getModelDataSnapshot(): Promise<ModelDataSnapshot> {
 
     return { houses: dataset.data.houses, metrics: metrics.data, modelLoaded: true };
   } catch (error) {
-    if (error instanceof ModelDataApiError) throw error;
+    if (error instanceof ModelDataApiError) {
+      logServerError("model-data.upstream-failure", error, { statusCode: error.status });
+      throw error;
+    }
     const timedOut = error instanceof Error && error.name === "TimeoutError";
+    logServerError("model-data.fetch-failed", error, { statusCode: timedOut ? 504 : 503 });
     throw new ModelDataApiError(
       timedOut ? "Price prediction service timed out." : "Price prediction service is unavailable.",
       timedOut ? 504 : 503,

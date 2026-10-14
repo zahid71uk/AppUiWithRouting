@@ -4,6 +4,7 @@ import {
   type MarketFilters,
   type MarketSnapshot,
 } from "@/lib/market-analysis";
+import { logServerError } from "@/lib/server-log";
 
 export class MarketAnalysisApiError extends Error {
   constructor(message: string, readonly status: number) {
@@ -38,8 +39,12 @@ export async function getMarketSnapshot(filters: MarketFilters): Promise<MarketS
     }
     return parsed.data;
   } catch (error) {
-    if (error instanceof MarketAnalysisApiError) throw error;
+    if (error instanceof MarketAnalysisApiError) {
+      logServerError("market-analysis.upstream-failure", error, { statusCode: error.status });
+      throw error;
+    }
     const timedOut = error instanceof Error && error.name === "TimeoutError";
+    logServerError("market-analysis.fetch-failed", error, { statusCode: timedOut ? 504 : 503 });
     throw new MarketAnalysisApiError(
       timedOut ? "Market analysis service timed out." : "Market analysis service is unavailable.",
       timedOut ? 504 : 503,

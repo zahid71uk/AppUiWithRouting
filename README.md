@@ -19,6 +19,10 @@ npm.cmd run dev
 
 Open `http://localhost:3000`. Start `PricePredictionModel`, `valueestimator`, and `marketanalysis` first. Next.js Route Handlers forward requests server-to-server, so browser CORS access is not required.
 
+## Logging
+
+Server-side API and upstream failures are written as structured JSON lines to the terminal (stdout/stderr), not to project log files. Route-render failures are reported in the browser developer console. For a Docker run, use `docker logs -f property-desk`.
+
 ## Docker
 
 Build and run the frontend image from this directory after starting the backend containers on the `property-estimator` network:

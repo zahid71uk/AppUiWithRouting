@@ -1,5 +1,6 @@
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
+import { logServerError } from "@/lib/server-log";
 
 const fallbackMaximumBytes = 5 * 1024 * 1024;
 
@@ -63,9 +64,13 @@ export async function POST(request: Request) {
       signal: AbortSignal.timeout(90_000),
     });
     const responseBody: unknown = await response.json().catch(() => ({ message: "The training service returned an invalid response." }));
+    if (response.status >= 500) {
+      logServerError("dataset-upload.upstream-failure", null, { statusCode: response.status });
+    }
     return NextResponse.json(responseBody, { status: response.status });
   } catch (error) {
     const timedOut = error instanceof Error && error.name === "TimeoutError";
+    logServerError("dataset-upload.request-failed", error, { statusCode: timedOut ? 504 : 503 });
     return NextResponse.json(
       { message: timedOut ? "Training took too long to respond." : "The training service is unavailable." },
       { status: timedOut ? 504 : 503 },
