@@ -25,6 +25,7 @@ export function Navigation() {
           <Link
             key={href}
             href={href}
+            prefetch={href === "/market-analysis" ? false : undefined}
             aria-current={active ? "page" : undefined}
             className={`nav-link${active ? " nav-link-active" : ""}`}
           >

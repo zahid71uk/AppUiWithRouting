@@ -37,7 +37,7 @@ export async function getModelDataSnapshot(): Promise<ModelDataSnapshot> {
     }
 
     if (!health.data.model_loaded) {
-      return { houses: dataset.data.houses, metrics: null, modelLoaded: false };
+      return { houses: [], metrics: null, modelLoaded: false };
     }
 
     const metricsResponse = await fetch(`${baseUrl}/model/metrics`, {

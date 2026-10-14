@@ -12,7 +12,12 @@ export function DatasetUploadForm({ maxUploadBytes }: { maxUploadBytes: number }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (file) await upload(file, token);
+    const form = event.currentTarget;
+    if (file && await upload(file, token)) {
+      form.reset();
+      setFile(null);
+      setToken("");
+    }
   }
 
   return (

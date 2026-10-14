@@ -146,7 +146,7 @@ export function MarketDashboard({ initialFilters, initialSnapshot }: MarketDashb
             <span className="table-count" aria-live="polite">{properties.length} of {snapshot.properties.totalElements} rows</span>
           </div>
           {properties.length === 0 ? (
-            <div className="empty-state market-empty">No rows match these filters. Adjust the ranges to see the sample.</div>
+            <div className="empty-state market-empty">No housing rows are available for the current analysis.</div>
           ) : (
             <div className="table-scroll market-table-scroll">
               <table className="data-table market-table">

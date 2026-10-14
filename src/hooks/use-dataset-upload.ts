@@ -13,20 +13,20 @@ export function useDatasetUpload(maximumBytes: number) {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  async function upload(file: File, token: string): Promise<void> {
+  async function upload(file: File, token: string): Promise<boolean> {
     setError("");
     setMessage("");
     if (!file.name.toLowerCase().endsWith(".csv")) {
       setError("Choose a CSV file.");
-      return;
+      return false;
     }
     if (file.size > (maximumBytes || defaultMaximumBytes)) {
       setError("The selected file exceeds the upload limit.");
-      return;
+      return false;
     }
     if (!token.trim()) {
       setError("Enter the dataset upload token.");
-      return;
+      return false;
     }
 
     setIsUploading(true);
@@ -51,8 +51,10 @@ export function useDatasetUpload(maximumBytes: number) {
       if (!parsed.success) throw new Error("The training service returned an invalid response.");
       setMessage(parsed.data.message);
       router.refresh();
+      return true;
     } catch (uploadError) {
       setError(uploadError instanceof Error ? uploadError.message : "The dataset could not be promoted.");
+      return false;
     } finally {
       setIsUploading(false);
     }

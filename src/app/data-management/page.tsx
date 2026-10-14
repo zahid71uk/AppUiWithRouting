@@ -90,15 +90,17 @@ export default async function DataManagementPage({ searchParams }: DataManagemen
               <tr><th scope="col">ID</th><th scope="col">Area</th><th scope="col">Beds</th><th scope="col">Built</th><th scope="col">Price</th></tr>
             </thead>
             <tbody>
-              {page.items.map((house) => (
-                <tr key={house.id}>
-                  <th scope="row">{house.id}</th>
-                  <td>{house.square_footage.toLocaleString("en-GB")} sq ft</td>
-                  <td>{house.bedrooms}</td>
-                  <td>{house.year_built}</td>
-                  <td className="price-cell">{currency.format(house.price)}</td>
-                </tr>
-              ))}
+              {page.items.length === 0 ? (
+                <tr><td colSpan={5} className="empty-state">No source rows are available because the prediction model is unavailable.</td></tr>
+              ) : page.items.map((house) => (
+                  <tr key={house.id}>
+                    <th scope="row">{house.id}</th>
+                    <td>{house.square_footage.toLocaleString("en-GB")} sq ft</td>
+                    <td>{house.bedrooms}</td>
+                    <td>{house.year_built}</td>
+                    <td className="price-cell">{currency.format(house.price)}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
